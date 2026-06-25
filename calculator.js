@@ -55,6 +55,7 @@ function silverPrice() {
   return Math.max(1, parseFloat(silverPriceInput.value) || 80);
 }
 
+
 function currentNisab() {
   return nisabStandard === 'gold'
     ? NISAB_GOLD_GRAMS * goldPrice()

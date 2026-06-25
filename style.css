@@ -444,6 +444,35 @@ h1, h2, h3 {
   flex-shrink: 0;
 }
 
+.cbr-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.cbr-hint svg {
+  color: var(--gold-dim);
+  flex-shrink: 0;
+}
+
+.cbr-hint a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.cbr-hint a:hover {
+  text-decoration: underline;
+}
+
 .calc-group--gold-price .calc-group__label,
 .calc-group--silver-price .calc-group__label {
   color: var(--gold);
