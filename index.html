@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Закят — Калькулятор</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Фоновый орнамент -->
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <!-- Навигация -->
+  <nav class="nav">
+    <div class="nav__logo">زكاة</div>
+    <div class="nav__links">
+      <a href="#about">О закяте</a>
+      <a href="#calculator">Калькулятор</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero__arabic">زكاة</div>
+    <div class="hero__content">
+      <h1 class="hero__title">Закят</h1>
+      <p class="hero__subtitle">Рассчитайте вашу обязательную милостыню</p>
+      <p class="hero__desc">Один из пяти столпов ислама — очищение имущества и поддержка нуждающихся</p>
+      <a href="#calculator" class="btn btn--primary">Рассчитать закят</a>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- О закяте -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section-title">Что такое Закят?</h2>
+      <p class="section-subtitle">Закят — обязательный налог в исламе, равный 2.5% от накоплений, превышающих нисаб (порог).</p>
+      <div class="about__cards">
+        <div class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/>
+              <path d="M24 14v10l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Когда платить</h3>
+          <p>Закят выплачивается раз в году (лунный год), если имущество превышает нисаб на протяжении всего года.</p>
+        </div>
+        <div class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="16" width="32" height="22" rx="3" stroke="currentColor" stroke-width="2"/>
+              <path d="M16 16V12a8 8 0 0116 0v4" stroke="currentColor" stroke-width="2"/>
+              <circle cx="24" cy="27" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Что облагается</h3>
+          <p>Золото, серебро, наличные, сбережения, товары для торговли и долги к получению — за вычетом ваших долгов.</p>
+        </div>
+        <div class="card">
+          <div class="card__icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 6L6 18v4h36v-4L24 6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 22v14M20 22v14M28 22v14M36 22v14" stroke="currentColor" stroke-width="2"/>
+              <path d="M6 36h36" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3>Кому отдавать</h3>
+          <p>Бедным, нуждающимся, должникам, путешественникам без средств и другим категориям, указанным в Коране (9:60).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Нисаб баннер -->
+  <section class="nisab-banner">
+    <div class="container">
+      <div class="nisab-banner__inner">
+        <div class="nisab-banner__text">
+          <h3>Текущий нисаб</h3>
+          <div class="nisab-toggle">
+            <button class="nisab-toggle__btn nisab-toggle__btn--active" data-standard="gold">
+              Золото (85 г)
+            </button>
+            <button class="nisab-toggle__btn" data-standard="silver">
+              Серебро (595 г)
+            </button>
+          </div>
+          <p id="nisabDesc">Минимальный порог — стоимость <strong>85 граммов золота</strong></p>
+        </div>
+        <div class="nisab-banner__value">
+          <span class="nisab-banner__amount" id="nisabDisplay">637 500 ₽</span>
+          <span class="nisab-banner__note" id="nisabNote">при цене золота <span id="goldPriceDisplay">7 500</span> ₽/г</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Калькулятор -->
+  <section class="calculator-section" id="calculator">
+    <div class="container">
+      <h2 class="section-title">Калькулятор закята</h2>
+      <p class="section-subtitle">Введите ваши активы. Все расчёты происходят в браузере — данные никуда не отправляются.</p>
+
+      <div class="calc-wrapper">
+        <!-- Левая панель — форма -->
+        <div class="calc-form">
+
+          <!-- Цены металлов -->
+          <div class="calc-group calc-group--gold-price">
+            <label class="calc-group__label">Цена золота (₽ за грамм)</label>
+            <div class="input-row">
+              <input type="number" id="goldPrice" class="input" value="7500" min="0" placeholder="7500" />
+              <span class="input-hint">Обновите при необходимости</span>
+            </div>
+          </div>
+          <div class="calc-group calc-group--silver-price">
+            <label class="calc-group__label">Цена серебра (₽ за грамм)</label>
+            <div class="input-row">
+              <input type="number" id="silverPrice" class="input" value="80" min="0" placeholder="80" />
+              <span class="input-hint">Обновите при необходимости</span>
+            </div>
+          </div>
+
+          <div class="calc-divider"><span>Активы</span></div>
+
+          <!-- Золото -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="gold">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2a1 1 0 011 1v1.07A7.001 7.001 0 0116.93 10H18a1 1 0 010 2h-1.07A7.001 7.001 0 0111 17.93V19a1 1 0 01-2 0v-1.07A7.001 7.001 0 013.07 12H2a1 1 0 010-2h1.07A7.001 7.001 0 019 3.07V2a1 1 0 011-1zm0 4a5 5 0 100 10A5 5 0 0010 6z"/>
+              </svg>
+              Золото (граммы)
+            </label>
+            <input type="number" id="gold" class="input" min="0" placeholder="0" />
+            <span class="calc-group__sub" id="goldRub">≈ 0 ₽</span>
+          </div>
+
+          <!-- Серебро -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="silver">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="10" cy="10" r="4" fill="currentColor" opacity="0.5"/>
+              </svg>
+              Серебро (граммы)
+            </label>
+            <input type="number" id="silver" class="input" min="0" placeholder="0" />
+            <span class="calc-group__sub" id="silverRub">≈ 0 ₽</span>
+          </div>
+
+          <!-- Наличные -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="cash">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 5a1 1 0 011-1h4a1 1 0 010 2H8a1 1 0 01-1-1zm0 3a1 1 0 011-1h2a1 1 0 010 2H8a1 1 0 01-1-1z" clip-rule="evenodd"/>
+              </svg>
+              Наличные (₽)
+            </label>
+            <input type="number" id="cash" class="input" min="0" placeholder="0" />
+          </div>
+
+          <!-- Сбережения -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="savings">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 010 2H5a1 1 0 01-1-1zm5-1a1 1 0 000 2h1a1 1 0 000-2H9z" clip-rule="evenodd"/>
+              </svg>
+              Сбережения и вклады (₽)
+            </label>
+            <input type="number" id="savings" class="input" min="0" placeholder="0" />
+          </div>
+
+          <!-- Товары -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="goods">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C4.801 11.14 5.268 12 6 12h12a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 2H4.72l-.35-1.4A1 1 0 003 1z"/>
+                <circle cx="8" cy="16" r="1.5" fill="currentColor"/>
+                <circle cx="14" cy="16" r="1.5" fill="currentColor"/>
+              </svg>
+              Товары для торговли (₽)
+            </label>
+            <input type="number" id="goods" class="input" min="0" placeholder="0" />
+          </div>
+
+          <!-- Криптовалюта -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="crypto">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm.75 11.5v.75a.75.75 0 01-1.5 0v-.75H8a.75.75 0 010-1.5h.25V8.25H8a.75.75 0 010-1.5h1.25V6a.75.75 0 011.5 0v.75H11a2 2 0 010 4h-.25v1.25H11a2 2 0 010 4h-.25zm-.25-4H11a.5.5 0 000-1h-.5v1zm0 2.5v1H11a.5.5 0 000-1h-.5z"/>
+              </svg>
+              Криптовалюта (₽)
+            </label>
+            <input type="number" id="crypto" class="input" min="0" placeholder="0" />
+            <span class="calc-group__sub calc-group__tip">Рыночная стоимость на дату расчёта закята</span>
+          </div>
+
+          <!-- Акции -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="stocks">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z" clip-rule="evenodd"/>
+              </svg>
+              Акции и ценные бумаги (₽)
+            </label>
+            <input type="number" id="stocks" class="input" min="0" placeholder="0" />
+            <span class="calc-group__sub calc-group__tip">Текущая рыночная стоимость портфеля</span>
+          </div>
+
+          <!-- Арендный доход -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="rental">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" clip-rule="evenodd"/>
+              </svg>
+              Накопленный арендный доход (₽)
+            </label>
+            <input type="number" id="rental" class="input" min="0" placeholder="0" />
+            <span class="calc-group__sub calc-group__tip">Полученный доход от аренды, не потраченный за год</span>
+          </div>
+
+          <!-- Долги к получению -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="receivable">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/>
+              </svg>
+              Долги к получению (₽)
+            </label>
+            <input type="number" id="receivable" class="input" min="0" placeholder="0" />
+          </div>
+
+          <div class="calc-divider"><span>Скот и урожай</span></div>
+
+          <!-- Скот -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="livestock">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M3 4a1 1 0 000 2h1v1a5 5 0 004 4.9V13H7a1 1 0 000 2h6a1 1 0 000-2h-1v-1.1A5 5 0 0016 7V6h1a1 1 0 000-2h-1.026A5.001 5.001 0 0011 2.05V2a1 1 0 00-2 0v.05A5.001 5.001 0 004.026 4H3z"/>
+              </svg>
+              Скот — верблюды, коровы, овцы (₽)
+            </label>
+            <input type="number" id="livestock" class="input" min="0" placeholder="0" />
+            <span class="calc-group__sub calc-group__tip">Рыночная стоимость поголовья. Ставка 2.5%</span>
+          </div>
+
+          <!-- Урожай -->
+          <div class="calc-group">
+            <label class="calc-group__label" for="harvest">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.5 2a.5.5 0 01.5.5V4h8V2.5a.5.5 0 011 0V4h1a1 1 0 011 1v1H3V5a1 1 0 011-1h1V2.5a.5.5 0 01.5-.5zM3 8v8a1 1 0 001 1h12a1 1 0 001-1V8H3zm4 2a1 1 0 000 2h6a1 1 0 000-2H7z" clip-rule="evenodd"/>
+              </svg>
+              Урожай — зерно, фрукты, овощи (₽)
+            </label>
+            <input type="number" id="harvest" class="input" min="0" placeholder="0" />
+            <span class="calc-group__sub calc-group__tip">Стоимость урожая пшеницы, ячменя, фиников и т.д.</span>
+            <div class="harvest-rate">
+              <span class="harvest-rate__label">Способ полива:</span>
+              <div class="harvest-rate__btns">
+                <button class="harvest-btn harvest-btn--active" data-rate="0.1">
+                  Дождевой / природный <span class="harvest-btn__rate">10%</span>
+                </button>
+                <button class="harvest-btn" data-rate="0.05">
+                  Искусственный полив <span class="harvest-btn__rate">5%</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-divider"><span>Вычеты</span></div>
+
+          <!-- Долги к выплате -->
+          <div class="calc-group calc-group--deduct">
+            <label class="calc-group__label" for="payable">
+              <svg class="calc-group__icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 000 2h2v2a1 1 0 102 0v-2h2a1 1 0 000-2h-2V7z" clip-rule="evenodd"/>
+              </svg>
+              Долги к выплате (₽)
+            </label>
+            <input type="number" id="payable" class="input" min="0" placeholder="0" />
+          </div>
+
+          <button class="btn btn--primary btn--full" id="calcBtn">Рассчитать</button>
+        </div>
+
+        <!-- Правая панель — результат -->
+        <div class="calc-result" id="calcResult">
+          <div class="result-placeholder" id="resultPlaceholder">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="36" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+              <path d="M40 22v18l10 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+            <p>Заполните поля и нажмите «Рассчитать»</p>
+          </div>
+
+          <div class="result-content" id="resultContent" style="display:none">
+            <!-- Заполняется JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-title">Частые вопросы</h2>
+      <div class="faq__list">
+
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">Что такое нисаб?</button>
+          <div class="faq__a">
+            <p>Нисаб — минимальный порог имущества, при достижении которого закят становится обязательным. Традиционно нисаб равен стоимости 85 граммов золота или 595 граммов серебра. В данном калькуляторе используется золотой стандарт.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">Учитываются ли ипотека и долги?</button>
+          <div class="faq__a">
+            <p>Да. Краткосрочные долги (которые нужно выплатить в течение года) вычитаются из суммы активов. Долгосрочные долги (например, ипотека) по мнению большинства учёных вычитаются только в части ближайшего платежа. Обратитесь к алиму за уточнением в вашей конкретной ситуации.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">Когда нужно платить закят?</button>
+          <div class="faq__a">
+            <p>Закят выплачивается раз в лунный год (хиджра). Отсчёт идёт с момента, когда ваше имущество впервые превысило нисаб. Многие мусульмане приурочивают выплату к месяцу Рамадан, хотя это не обязательно.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">Кому можно отдать закят?</button>
+          <div class="faq__a">
+            <p>Коран (сура 9, аят 60) называет 8 категорий получателей: бедные (фукара), нуждающиеся (масакин), работники по сбору закята, новообращённые мусульмане, рабы для выкупа, должники, на пути Аллаха, путники без средств.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">Облагается ли жильё и личное имущество?</button>
+          <div class="faq__a">
+            <p>Нет. Жильё, в котором вы проживаете, личный автомобиль, одежда, предметы обихода — не облагаются закятом. Закят распространяется только на «растущее» имущество: деньги, золото, серебро, товары для продажи и доходные активы.</p>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">Что такое закят аль-фитр?</button>
+          <div class="faq__a">
+            <p>Закят аль-фитр — отдельный вид пожертвования, выплачиваемый в конце Рамадана до праздничной молитвы Ид аль-Фитр. Он обязателен для каждого дееспособного мусульманина и не зависит от нисаба. Данный калькулятор считает только закят аль-маль (с имущества).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__arabic">زكاة</span>
+          <span class="footer__name">Закят</span>
+        </div>
+        <p class="footer__disclaimer">Данный сайт носит исключительно информационный характер и не является фетвой. По спорным вопросам обращайтесь к квалифицированному алиму.</p>
+        <p class="footer__copy">Личный проект · Данные не собираются и не передаются</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="calculator.js"></script>
+</body>
+</html>
